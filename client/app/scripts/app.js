@@ -51,3 +51,8 @@ App.PostController = Ember.ObjectController.extend({
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
 })
+
+
+App.Store = DS.Store.extend({
+  adapter: DS.RESTAdapter
+})
