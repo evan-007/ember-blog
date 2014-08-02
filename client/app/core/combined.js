@@ -52,7 +52,6 @@ Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
 })
 
-
-App.Store = DS.Store.extend({
-  adapter: DS.RESTAdapter
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+  namespace: 'api/v1'
 })
