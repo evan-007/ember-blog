@@ -15,3 +15,4 @@
 /log/*.log
 /tmp
 /client/app/bower_components
+/client/node_modules
