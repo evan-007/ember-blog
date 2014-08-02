@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Ember blog</title>
   <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./css/custom.css">
 </head>
 <body>
 	<script type="text/x-handlebars">
@@ -11,15 +12,66 @@
       <div class='navbar-inner'>
         <a class='navbar-brand' href='#'>Bloggr</a>
         <ul class='nav navbar-nav'>
-          <li><a href="posts">posts</a></li>
-          <li><a href="about">about</a></li>
+          <li>{{#link-to 'posts'}}posts{{/link-to}}</li>
+          <li>{{#link-to 'about'}}about{{/link-to}}</li>
         </ul>
       </div>
 	  </div>
+    {{outlet}}
 	</script>
+
+  <script type="text/x-handlebars" id="about">
+    <p>Wow, Im the about page</p>
+  </script>
+
+  <script type="text/x-handlebars" id="posts">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <table class="table">
+            <thead>
+              <tr><th>Recent Posts</th></tr>
+            </thead>
+            {{#each}}
+              <tr><td>
+                {{#link-to 'post' this}}
+                  {{title}} <span class='muted'>by {{author.name}}</span>
+                {{/link-to}}
+              </td></tr>
+            {{/each}}
+          </table>
+        </div>
+        <div class='col-sm-9'>
+          {{outlet}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="post">
+    {{#if isEditing}}
+      {{partial 'post/edit'}}
+      <button {{action 'doneEditing'}}>Done</button>
+    {{else}}
+      <button {{action 'edit'}}>edit</button>
+    {{/if}}
+
+    <h1>{{title}}</h1>
+    <h2>by: {{author.name}} <small class='muted'>{{format-date date}}</small></h2>
+    <hr>
+    <div class="intro">{{excerpt}}</div>
+    <div class='below the fold'>{{body}}</div>
+  </script>
+
+  <script type="text/x-handlebars" id="post/_edit">
+    <p>{{input class="form-control" type="text" value=title}}</p>
+    <p>{{input class="form-control" type="text" value=excerpt}}</p>
+    <p>{{textarea class="form-control" value=body}}</p>
+  </script>
   <script src="./bower_components/jquery/dist/jquery.js"></script>
   <script src="./bower_components/handlebars/handlebars.js"></script>
   <script src="./bower_components/ember/ember.js"></script>
+  <script src="./bower_components/moment/moment.js"></script>
   <!-- <script src="./bower_components/ember-data/ember-data.js"></script> -->
   <script src="./scripts/app.js"></script>
 </body>
