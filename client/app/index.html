@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Ember blog</title>
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
+	<script type="text/x-handlebars">
+	  <div class='navbar navbar-default'>
+      <div class='navbar-inner'>
+        <a class='navbar-brand' href='#'>Bloggr</a>
+        <ul class='nav navbar-nav'>
+          <li><a href="posts">posts</a></li>
+          <li><a href="about">about</a></li>
+        </ul>
+      </div>
+	  </div>
+	</script>
   <script src="./bower_components/jquery/dist/jquery.js"></script>
   <script src="./bower_components/handlebars/handlebars.js"></script>
   <script src="./bower_components/ember/ember.js"></script>
-  <script src="./bower_components/ember-data/ember-data.js"></script>
+  <!-- <script src="./bower_components/ember-data/ember-data.js"></script> -->
+  <script src="./scripts/app.js"></script>
 </body>
 </html>
