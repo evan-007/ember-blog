@@ -25,13 +25,13 @@ App.Router.map(function(){
 
 App.PostsRoute = Ember.Route.extend({
   model: function(){
-    return posts;
+    return this.store.find('post');
   }
 });
 
 App.PostRoute = Ember.Route.extend({
   model: function(params){
-    return posts.findBy('id', params.post_id)
+    return this.store.find('post', params.post_id)
   }
 })
 
@@ -53,5 +53,19 @@ Ember.Handlebars.helper('format-date', function(date) {
 })
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-  namespace: 'api/v1'
+  namespace: 'api/v1',
+  host: 'http://localhost:3000'
+})
+
+var attr = DS.attr
+
+App.Post = DS.Model.extend({
+  title: attr(),
+  body: attr(),
+  created_at: attr(),
+  updated_at: attr()
+})
+
+App.PostSerializer = DS.JSONSerializer.extend({
+  primaryKey: 'id'
 })
